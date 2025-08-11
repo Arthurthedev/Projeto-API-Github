@@ -1,7 +1,9 @@
-import {getUser} from "./services/user.js";
-import{getRepositories}from "./services/repositories.js";
-import{user} from "./objects/user.js";
-import{screen} from "./objects/screen.js";
+import { getUser } from "./services/user.js";
+import{ getRepositories }from "./services/repositories.js";
+import{ user } from "./objects/user.js";
+import{ screen } from "./objects/screen.js";
+import { getEvents } from "./services/events.js";
+
 
 document.getElementById('btn-search').addEventListener("click", ()=>{
     const userName = document.getElementById('input-search').value
@@ -33,17 +35,19 @@ async function getUserData(userName) {
             return
         }
         const repositoriesResponse = await getRepositories(userName)
+        const eventsResponse = await getEvents(userName)
 
         user.setInfo(userResponse)
         user.setRepositories(repositoriesResponse)
+        user.setEvents(eventsResponse)
         screen.renderUser(user)
+        
         
     } catch (error) {
         console.log(error);
     }
 }
-
-
+getUserData("Cadudias")
 // function getUserRepositories(userName) {
 //     getRepositories(userName).then((reposData) =>{
 //         // INFORMACOES DO LOG DO REPO DATA
