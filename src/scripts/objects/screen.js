@@ -5,7 +5,7 @@ const screen = {
                             <img src="${user.avatarUrl}" alt="Foto de perfil do Usuário">
                             <div class="data">
                                 <h1>${user.name ?? "Não possui nome cadastrado"}</h1>
-                                <p class="followers">Seguidores:${user.followers} | Seguindo:${user.following}</p>
+                                <p class="followers">Seguidores:${user.followers ?? 0} | Seguindo:${user.following ?? 0}</p>
                                 <p>${user.bio ?? "Não possui bio cadastrada"}</p>
                             </div>
                         </div>`
@@ -36,10 +36,10 @@ const screen = {
             } else {
                 eventsItens += `<li><span>${event.repo.name}</span> - sem mensagem de commit</li>`;
             }
-            document.querySelector('.events').innerHTML = `<h2>Eventos</h2>
-                                                          <ul>${eventsItens}</ul>`
+            
         })
-        
+        document.querySelector('.events').innerHTML = `<h2>Eventos</h2>
+                                                          <ul>${eventsItens}</ul>`
     },
     renderNotFound(){
         this.userProfile.innerHTML = "<h3>Usuário não encontrado</h3>"
